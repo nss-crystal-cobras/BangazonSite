@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
+//HasData() method lets you create one or more instances of a database model
+//Instances will be turned into INSERT INTO SQL statements when you generate a migration
+//generate migration: thru Package Manager or thru command line
 namespace Bangazon.Data {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser> {
         public ApplicationDbContext (DbContextOptions<ApplicationDbContext> options) : base (options) { }
@@ -84,6 +87,11 @@ namespace Bangazon.Data {
                 new ProductType () {
                     ProductTypeId = 2,
                         Label = "Appliances"
+                },
+                new ProductType()
+                {
+                    ProductTypeId = 3,
+                    Label = "Electronics"
                 }
             );
 
@@ -105,6 +113,36 @@ namespace Bangazon.Data {
                         Title = "Wheelbarrow",
                         Quantity = 5,
                         Price = 29.99
+                },
+                new Product()
+                {
+                    ProductId = 3,
+                    ProductTypeId = 3,
+                    UserId = user.Id,
+                    Description = "Spell out a secret fun message for your friends",
+                    Title = "SkyWriter",
+                    Quantity = 15,
+                    Price = 29.99
+                },
+                new Product()
+                {
+                    ProductId = 4,
+                    ProductTypeId = 3,
+                    UserId = user.Id,
+                    Description = "HD Plasma 50-inch",
+                    Title = "Toshiba TV",
+                    Quantity = 2,
+                    Price = 929.99
+                },
+                new Product()
+                {
+                    ProductId = 5,
+                    ProductTypeId = 3,
+                    UserId = user.Id,
+                    Description = "Make your friends jealous",
+                    Title = "IPhone X",
+                    Quantity = 10,
+                    Price = 999.99
                 }
             );
 
