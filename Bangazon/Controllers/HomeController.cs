@@ -24,6 +24,7 @@ namespace Bangazon.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
+            //.Take(20) limits results on home page to first 20 products in DB
             var applicationDbContext = _context.Product.Include(p => p.ProductType).Include(p => p.User).Take(20);
             return View(await applicationDbContext.ToListAsync());
         }
