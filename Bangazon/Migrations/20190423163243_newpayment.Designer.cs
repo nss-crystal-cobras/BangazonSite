@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bangazon.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190422164910_BangazonTables")]
-    partial class BangazonTables
+    [Migration("20190423163243_newpayment")]
+    partial class newpayment
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -83,9 +83,9 @@ namespace Bangazon.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2b43d80c-25d9-4820-a424-b53a44531427",
+                            Id = "55220fa8-a3d1-440d-81b5-386da131d8fe",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "08e18d96-296f-4b82-bdf7-3fe952aeb7dd",
+                            ConcurrencyStamp = "1b6d4eec-8588-40a4-8fff-526e0685f9b5",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "admin",
@@ -93,9 +93,9 @@ namespace Bangazon.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMTLhBvUwV3y9i/29q40GJ+X1qgoz5dEcH/Xs0A0joJIVPVXbe5HQG6jaIR879bsBg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAWNyZ9xm2txYLw+/fQzZ60XyYhgALtNdX249Ae++8XzayFgJmeTz5wVvMY6uWqiDw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "36a4fabf-4a29-4c96-9a03-66a6b559e6e6",
+                            SecurityStamp = "2b43d80c-25d9-4820-a424-b53a44531427",
                             StreetAddress = "123 Infinity Way",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
@@ -132,7 +132,7 @@ namespace Bangazon.Migrations
                         {
                             OrderId = 1,
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = "2b43d80c-25d9-4820-a424-b53a44531427"
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
                         });
                 });
 
@@ -203,7 +203,7 @@ namespace Bangazon.Migrations
                             AccountNumber = "86753095551212",
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "American Express",
-                            UserId = "2b43d80c-25d9-4820-a424-b53a44531427"
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
                         },
                         new
                         {
@@ -211,7 +211,15 @@ namespace Bangazon.Migrations
                             AccountNumber = "4102948572991",
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Discover",
-                            UserId = "2b43d80c-25d9-4820-a424-b53a44531427"
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            PaymentTypeId = 3,
+                            AccountNumber = "4102948222991",
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Visa",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
                         });
                 });
 
@@ -264,7 +272,7 @@ namespace Bangazon.Migrations
                             ProductTypeId = 1,
                             Quantity = 100,
                             Title = "Kite",
-                            UserId = "2b43d80c-25d9-4820-a424-b53a44531427"
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
                         },
                         new
                         {
@@ -275,7 +283,7 @@ namespace Bangazon.Migrations
                             ProductTypeId = 2,
                             Quantity = 5,
                             Title = "Wheelbarrow",
-                            UserId = "2b43d80c-25d9-4820-a424-b53a44531427"
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
                         },
                         new
                         {
@@ -286,7 +294,7 @@ namespace Bangazon.Migrations
                             ProductTypeId = 3,
                             Quantity = 15,
                             Title = "SkyWriter",
-                            UserId = "2b43d80c-25d9-4820-a424-b53a44531427"
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
                         },
                         new
                         {
@@ -297,7 +305,7 @@ namespace Bangazon.Migrations
                             ProductTypeId = 3,
                             Quantity = 2,
                             Title = "Toshiba TV",
-                            UserId = "2b43d80c-25d9-4820-a424-b53a44531427"
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
                         },
                         new
                         {
@@ -307,8 +315,195 @@ namespace Bangazon.Migrations
                             Price = 999.99000000000001,
                             ProductTypeId = 3,
                             Quantity = 10,
-                            Title = "IPhone X",
-                            UserId = "2b43d80c-25d9-4820-a424-b53a44531427"
+                            Title = "iPhone X",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Improve your skills at the only sport where drinking is acceptable",
+                            Price = 35.0,
+                            ProductTypeId = 1,
+                            Quantity = 90,
+                            Title = "Bowling Ball",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 7,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Special sale because we ordered too many",
+                            Price = 9.9900000000000002,
+                            ProductTypeId = 1,
+                            Quantity = 800,
+                            Title = "Size 15 soccer cleats",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "The preferred pasttime of the bourgeoisie",
+                            Price = 49.990000000000002,
+                            ProductTypeId = 1,
+                            Quantity = 41,
+                            Title = "Croquet set",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 9,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "See your pool lining in HD",
+                            Price = 14.99,
+                            ProductTypeId = 1,
+                            Quantity = 80,
+                            Title = "Prescription goggles",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 10,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Look good feel good",
+                            Price = 9.9900000000000002,
+                            ProductTypeId = 1,
+                            Quantity = 74,
+                            Title = "Sweatbands",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 11,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Scoops ice cream",
+                            Price = 9.9900000000000002,
+                            ProductTypeId = 2,
+                            Quantity = 102,
+                            Title = "Ice cream scoop",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 12,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Let a robot help with the upcoming potluck",
+                            Price = 59.990000000000002,
+                            ProductTypeId = 2,
+                            Quantity = 17,
+                            Title = "Electric mixer",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 13,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Mmmm... Toasty",
+                            Price = 49.990000000000002,
+                            ProductTypeId = 2,
+                            Quantity = 25,
+                            Title = "Toaster oven",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 14,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "A whisk for every occasion",
+                            Price = 19.989999999999998,
+                            ProductTypeId = 2,
+                            Quantity = 31,
+                            Title = "Set of 12 whisks",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 15,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Choose between Halloween, Christmas, and Easter designs",
+                            Price = 9.9900000000000002,
+                            ProductTypeId = 2,
+                            Quantity = 67,
+                            Title = "Themed oven mitt",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 16,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Fly away from your stepdad Ron",
+                            Price = 99.989999999999995,
+                            ProductTypeId = 1,
+                            Quantity = 14,
+                            Title = "Flying skateboard",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 17,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "We swear they work",
+                            Price = 99.989999999999995,
+                            ProductTypeId = 3,
+                            Quantity = 10,
+                            Title = "Spy glasses",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 18,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Looks real though",
+                            Price = 29.989999999999998,
+                            ProductTypeId = 3,
+                            Quantity = 20,
+                            Title = "Fake Rolex",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 19,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Make calculations",
+                            Price = 4.9900000000000002,
+                            ProductTypeId = 3,
+                            Quantity = 11,
+                            Title = "Calculator",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 20,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "How do they work?",
+                            Price = 19.989999999999998,
+                            ProductTypeId = 3,
+                            Quantity = 100,
+                            Title = "Magnets",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 21,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "Dinner for one",
+                            Price = 49.990000000000002,
+                            ProductTypeId = 3,
+                            Quantity = 10,
+                            Title = "Microwave oven",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
+                        },
+                        new
+                        {
+                            ProductId = 22,
+                            DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Description = "For your child",
+                            Price = 19.989999999999998,
+                            ProductTypeId = 3,
+                            Quantity = 10,
+                            Title = "Candy phone",
+                            UserId = "55220fa8-a3d1-440d-81b5-386da131d8fe"
                         });
                 });
 
