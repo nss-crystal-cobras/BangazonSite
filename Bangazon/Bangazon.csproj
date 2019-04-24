@@ -15,7 +15,7 @@
 
 
   <ItemGroup>
-    <Content Update="Views\Shared\Details.cshtml">
+    <Content Update="Views\Products\Details.cshtml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
