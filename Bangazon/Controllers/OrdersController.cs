@@ -53,10 +53,17 @@ namespace Bangazon.Controllers
                 .Include(o => o.User)
                 .Include(o => o.OrderProducts)
                 .ThenInclude(op => op.Product)
-                .FirstOrDefaultAsync(m => m.UserId == currentUser.Id.ToString() && m.PaymentTypeId == null);
+                .FirstOrDefaultAsync(m => m.UserId == currentUser.Id && m.PaymentTypeId == null);
 
             // setting the new order
             orderModel.Order = order;
+
+
+            //If when trying to retrieve order a null value is returned then show the empty cart view.
+            if (order == null)
+            {
+                return NotFound();
+            }
 
             // setting the viewmodel "lineitems" 
             orderModel.LineItems = order
@@ -70,11 +77,8 @@ namespace Bangazon.Controllers
 
                     }).ToList();
 
-            // If when trying to retrieve order a null value is returned then show the empty cart view.
-            if (order == null)
-            {
-                return View("EmptyCart");
-            }
+           
+          
             return View(orderModel);
         }
 
