@@ -58,6 +58,7 @@ namespace Bangazon.Controllers
             // setting the new order
             orderModel.Order = order;
 
+            // setting the viewmodel "lineitems" 
             orderModel.LineItems = order
                     .OrderProducts
                     .GroupBy(op => op.Product)
@@ -67,8 +68,7 @@ namespace Bangazon.Controllers
                         Units = g.Select(l => l.ProductId).Count(),
                         Cost = g.Key.Price * g.Select(l => l.ProductId).Count()
 
-                    }).ToList()
-                ;
+                    }).ToList();
 
             // If when trying to retrieve order a null value is returned then show the empty cart view.
             if (order == null)
