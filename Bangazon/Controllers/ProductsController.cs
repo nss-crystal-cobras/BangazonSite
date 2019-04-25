@@ -1,4 +1,4 @@
-﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,15 +15,20 @@ namespace Bangazon.Controllers
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
-        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
-        public ProductsController(ApplicationDbContext ctx,
-                            UserManager<ApplicationUser> userManager)
+        //access the currently authenticated user
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        //inject the UserManager service in the constructor
+        public ProductsController(ApplicationDbContext context,
+                                  UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
-            _context = ctx;
+            _context = context;
         }
+
+        //any method that needs to see who the user is can invoke the method
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         public async Task<IActionResult> Types()
         {
@@ -56,6 +61,8 @@ namespace Bangazon.Controllers
         }
 
         // GET: Products/Details/5
+        //Given 1+ users have purchased a product, when a user views the details, 
+        //--then the quantity display should show how many are remaining, not how many were originally for sale
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -194,7 +201,7 @@ namespace Bangazon.Controllers
         private bool ProductExists(int id)
         {
             return _context.Product.Any(e => e.ProductId == id);
-        }    
+        }
 
     }
 }
