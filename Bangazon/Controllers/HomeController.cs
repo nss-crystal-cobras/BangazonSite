@@ -30,7 +30,8 @@ namespace Bangazon.Controllers
         }
 
         // GET: Products/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // ProductDetails method is called in Index.cshtml
+        public async Task<IActionResult> ProductDetails(int? id)
         {
             if (id == null)
             {

@@ -14,7 +14,8 @@
         {
             <tr>
                 <td> 
-                    <a asp-action="Details" asp-route-id="@item.ProductId">@item.Title</a> 
+                    <!-- route to ProductDetails, which is the name of the Get method in HomeController -->
+                    <a asp-action="ProductDetails" asp-route-id="@item.ProductId">@item.Title</a> 
                 </td>
             </tr>
     }
