@@ -67,17 +67,15 @@ namespace Bangazon.Controllers
 
             // setting the viewmodel "lineitems" 
             orderModel.LineItems = order
-                    .OrderProducts
-                    .GroupBy(op => op.Product)
-                    .Select(g => new OrderLineItem
-                    {
-                        Product = g.Key,
-                        Units = g.Select(l => l.ProductId).Count(),
-                        Cost = g.Key.Price * g.Select(l => l.ProductId).Count()
+                .OrderProducts
+                .GroupBy(op => op.Product)
+                .Select(g => new OrderLineItem
+                {
+                    Product = g.Key,
+                    Units = g.Select(l => l.ProductId).Count(),
+                    Cost = g.Key.Price * g.Select(l => l.ProductId).Count()
 
-                    }).ToList();
-
-           
+                }).ToList();
           
             return View(orderModel);
         }
