@@ -1,18 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Bangazon.Data;
 using Bangazon.Models;
+using System.Diagnostics;
 
+//the last 20 products that have been added to the system will be displayed as hyperlinks to their respective detail pages
 namespace Bangazon.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ApplicationDbContext _context;
+
+        public HomeController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
+        }
+
+        // GET: Products
+        public async Task<IActionResult> Index()
+        {
+            //.Take(20) limits results on home page to first 20 products in DB
+            var applicationDbContext = _context.Product.Include(p => p.ProductType).Include(p => p.User).Take(20);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // GET: Products/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = await _context.Product
+                .Include(p => p.ProductType)
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(m => m.ProductId == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
         }
 
         public IActionResult Privacy()
