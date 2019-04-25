@@ -1,0 +1,42 @@
+﻿@model Bangazon.Models.ProductViewModels.ProductTypesViewModel
+
+@{
+    ViewData["Title"] = "Types";
+}
+
+<h3> Click on product name for details</h3>
+
+<p></p>
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.GroupedProducts)
+        {
+            <tr>
+                <td>
+                    <strong>
+                        @Html.DisplayFor(modelItem => item.TypeName)
+                        @Html.DisplayFor(modelItem => item.ProductCount)
+                    </strong>
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                </td>
+            </tr>
+            @foreach (var productsitem in item.Products)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@productsitem.ProductId">@productsitem.Title</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

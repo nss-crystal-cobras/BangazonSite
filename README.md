@@ -14,6 +14,12 @@ and most powerful commercial platform for individuals all around the globe.
 - User can see list of 20 most recent products in database
 - Each product name is a hyperlink routing the user to product's respective details page
 
+## Product Types Page
+- Author: Colleen Woolsey
+- From the Product Types tab in the navigation bar, user can see each product category along with the number of products in that category, as well as the three most recent products in that category
+- Each product name is a hyperlink that routes the user to that product's respective details page
+- From the Product Types page, user can return to the index of all products
+
 ## Technologies Used To Build This Application
 - C#
 - SQL
