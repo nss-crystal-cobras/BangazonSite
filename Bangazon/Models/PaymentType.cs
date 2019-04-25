@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,11 +19,13 @@ namespace Bangazon.Models
 
     [Required]
     [StringLength(55)]
+    [DisplayName("Bank Name")]
     public string Description { get; set; }
 
     [Required]
     [StringLength(20)]
-    public string AccountNumber { get; set; }
+    [DisplayName("Bank Account Number")]
+        public string AccountNumber { get; set; }
 
     [Required]
     public string UserId {get; set;}
