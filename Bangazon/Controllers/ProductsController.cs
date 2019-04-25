@@ -83,43 +83,40 @@ namespace Bangazon.Controllers
         }
 
         // GET: Products/Create
+        // JD
         public IActionResult Create()
         {
-            // Grab product type from database
+            // Grab product type from database and create new select list item of productTypes
             var productTypesComplete = _context.ProductType;
-
-            // Create new select list item of productTypes
             List<SelectListItem> productTypes = new List<SelectListItem>();
 
-            // Insert new position into productTypes list
+            // Insert into list
             productTypes.Insert(0, new SelectListItem
             {
                 Text = "Assign a Product Category",
                 Value = ""
             });
 
-            // Loop over product types in database
             foreach (var pt in productTypesComplete)
             {
-                // Create a new select list item of li
+                // Create a new select list item
                 SelectListItem li = new SelectListItem
                 {
-                    // Give a value to li
+                    
                     Value = pt.ProductTypeId.ToString(),
-                    // Provide text to li
                     Text = pt.Label
                 };
-                // Add li to productTypes select list item
+                // Add to productTypes
                 productTypes.Add(li);
             }
 
-            // Create instance of viewModel for Product Create
+         
             ProductCreateViewModel viewModel = new ProductCreateViewModel();
 
-            // Assign productTypes select list item to the product Types in ProductCreateViewModel
+            
             viewModel.ProductTypes = productTypes;
 
-            // View Data for dropdowns
+            // View dropdowns
             ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label");
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
 
@@ -143,58 +140,56 @@ namespace Bangazon.Controllers
             // If model state is valid
             if (ModelState.IsValid)
             {
-                // Add the user back
+                // Add the user back then add the product finally save changes to database
                 productCreate.Product.User = await GetCurrentUserAsync();
 
-                // Add the product
                 _context.Add(productCreate.Product);
 
-                // Save changes to database
                 await _context.SaveChangesAsync();
 
-                // Redirect to details view with id of product made using new object
+                // Redirect to details view via the new object
                 return RedirectToAction(nameof(Details), new { id = productCreate.Product.ProductId.ToString() });
             }
-            // Get data from ProductTypeId to be displayed in dropdown
+            // Get data to be displayed in dropdown
             ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label", productCreate.Product.ProductTypeId);
-
-            //Get data from UserId to be displayed in dropdown
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", productCreate.Product.UserId);
 
-            // Grab product type from database
+      
             var productTypesComplete = _context.ProductType;
 
-            // Create new select list item of productTypes
+            // Create new list
             List<SelectListItem> productTypes = new List<SelectListItem>();
 
-            // Insert new position into productTypes list
+            // Insert into productTypes
             productTypes.Insert(0, new SelectListItem
             {
                 Text = "Assign a Product Category",
                 Value = ""
             });
 
-            // Loop over product types in database
+            // Loop in order to display list items
             foreach (var pt in productTypesComplete)
             {
-                // Create a new select list item of li
+                
                 SelectListItem li = new SelectListItem
                 {
-                    // Give a value to li
+                    
                     Value = pt.ProductTypeId.ToString(),
-                    // Provide text to li
                     Text = pt.Label
                 };
-                // Add li to productTypes select list item
+                // Add to productTypes 
                 productTypes.Add(li);
             }
 
-            // Make productTypes in ProductCreateViewModel equal to productTypes
+            // put all current data into product create.productTypes in order to return
             productCreate.ProductTypes = productTypes;
 
-            // Return product view
+            
             return View(productCreate);
         }
+
+
+
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
