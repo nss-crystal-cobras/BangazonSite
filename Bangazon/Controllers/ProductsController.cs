@@ -83,34 +83,112 @@ namespace Bangazon.Controllers
         }
 
         // GET: Products/Create
+        // JD
         public IActionResult Create()
         {
-            // Remove the user from the model validation because it is
-            // not information posted in the form
-            ModelState.Remove("product.User");
+            // Grab product type from database and create new select list item of productTypes
+            var productTypesComplete = _context.ProductType;
+            List<SelectListItem> productTypes = new List<SelectListItem>();
 
+            // Insert into list
+            productTypes.Insert(0, new SelectListItem
+            {
+                Text = "Assign a Product Category",
+                Value = ""
+            });
+
+            foreach (var pt in productTypesComplete)
+            {
+                // Create a new select list item
+                SelectListItem li = new SelectListItem
+                {
+                    
+                    Value = pt.ProductTypeId.ToString(),
+                    Text = pt.Label
+                };
+                // Add to productTypes
+                productTypes.Add(li);
+            }
+
+         
+            ProductCreateViewModel viewModel = new ProductCreateViewModel();
+
+            
+            viewModel.ProductTypes = productTypes;
+
+            // View dropdowns
             ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label");
             ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
-            return View();
+
+            // Return view of ProductCreateViewModel
+            return View(viewModel);
         }
+
 
         // POST: Products/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,DateCreated,Description,Title,Price,Quantity,UserId,City,ImagePath,ProductTypeId")] Product product)
+        public async Task<IActionResult> Create(ProductCreateViewModel productCreate)
         {
+
+            // If the user is already in the ModelState
+            // Remove user from model state
+            ModelState.Remove("Product.User");
+
+            // If model state is valid
             if (ModelState.IsValid)
             {
-                _context.Add(product);
+                // Add the user back then add the product finally save changes to database
+                productCreate.Product.User = await GetCurrentUserAsync();
+
+                _context.Add(productCreate.Product);
+
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                // Redirect to details view via the new object
+                return RedirectToAction(nameof(Details), new { id = productCreate.Product.ProductId.ToString() });
             }
-            ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label", product.ProductTypeId);
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", product.UserId);
-            return View(product);
+            // Get data to be displayed in dropdown
+            ViewData["ProductTypeId"] = new SelectList(_context.ProductType, "ProductTypeId", "Label", productCreate.Product.ProductTypeId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", productCreate.Product.UserId);
+
+      
+            var productTypesComplete = _context.ProductType;
+
+            // Create new list
+            List<SelectListItem> productTypes = new List<SelectListItem>();
+
+            // Insert into productTypes
+            productTypes.Insert(0, new SelectListItem
+            {
+                Text = "Assign a Product Category",
+                Value = ""
+            });
+
+            // Loop in order to display list items
+            foreach (var pt in productTypesComplete)
+            {
+                
+                SelectListItem li = new SelectListItem
+                {
+                    
+                    Value = pt.ProductTypeId.ToString(),
+                    Text = pt.Label
+                };
+                // Add to productTypes 
+                productTypes.Add(li);
+            }
+
+            // put all current data into product create.productTypes in order to return
+            productCreate.ProductTypes = productTypes;
+
+            
+            return View(productCreate);
         }
+
+
 
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
