@@ -6,7 +6,10 @@
 
 <h3> Click on product name for details</h3>
 
-<p></p>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
 <table class="table">
     <thead>
         <tr>
@@ -19,14 +22,9 @@
             <tr>
                 <td>
                     <strong>
-                        @Html.DisplayFor(modelItem => item.TypeName)
+                        <a asp-action="Index" asp-route-id="@item.TypeId">@item.TypeName</a>
                         @Html.DisplayFor(modelItem => item.ProductCount)
                     </strong>
-                </td>
-                <td>
-                    @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
                 </td>
             </tr>
             @foreach (var productsitem in item.Products)
