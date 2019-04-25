@@ -47,7 +47,16 @@ namespace Bangazon.Controllers
 
             return View(model);
         }
-        
+
+        public async Task<IActionResult> ProductTypes(int id)
+        {
+            var ProductsByType = await _context.ProductType
+                .Include(pt => pt.Products)
+                .FirstOrDefaultAsync(pt => pt.ProductTypeId == id);
+
+            return View(ProductsByType);
+        }
+
         // GET: Products
         public async Task<IActionResult> Index()
         {

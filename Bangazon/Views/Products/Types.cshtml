@@ -22,7 +22,7 @@
             <tr>
                 <td>
                     <strong>
-                        <a asp-action="Index" asp-route-id="@item.TypeId">@item.TypeName</a>
+                        <a asp-controller="ProductTypes" asp-action="Details" asp-route-id="@item.TypeId">@item.TypeName</a>
                         @Html.DisplayFor(modelItem => item.ProductCount)
                     </strong>
                 </td>
